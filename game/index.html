@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Size It Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <div class="page">
+
+    <header class="topbar game-topbar">
+      <a class="brand" href="../EEp.html">
+        <img src="../assets/brainmaze-logo.png" alt="The Brain Maze — back to the map">
+      </a>
+      <a class="btn primary" href="leaderboard/index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 6h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3"/></svg>
+        Leaderboard
+      </a>
+    </header>
+
+    <section class="game-hero">
+      <div>
+        <p class="eyebrow">Guessing game</p>
+        <h1><span class="title-a">Size it</span> <span class="title-b">up</span></h1>
+        <p class="subtitle">10 rounds, two countries each, real shapes, no map to trick you. Drag the slider until they look the right size next to each other, then lock it in. Up to 100 points a round.</p>
+      </div>
+      <div class="scoreboard" aria-live="polite">
+        <div><span class="score-label">Round</span><span class="score-value" id="roundNum">1/10</span></div>
+        <div><span class="score-label">Points</span><span class="score-value" id="total">0</span></div>
+      </div>
+    </section>
+
+    <article class="card game" id="gameCard">
+      <div class="card-head game-head">
+        <div class="pair">
+          <span class="pair-name a"><i></i><span id="nameA">…</span></span>
+          <span class="pair-vs">vs</span>
+          <span class="pair-name b"><i></i><span id="nameB">…</span></span>
+        </div>
+      </div>
+
+      <div class="stage-wrap">
+        <div class="stage" id="stage">Loading countries…</div>
+        <div class="reveal-legend" id="revealLegend" hidden>
+          <span><i class="true"></i>Real size</span>
+          <span><i class="guess"></i>Your guess</span>
+        </div>
+      </div>
+
+      <div class="game-controls">
+        <div id="guessPanel">
+          <label class="guess-text" for="sizeSlider" id="guessText">They're about the same size</label>
+          <div class="slider-row">
+            <button class="step" id="smaller" aria-label="Make the second country smaller">−</button>
+            <input type="range" id="sizeSlider" min="-2" max="2" step="0.01" value="0"
+                   aria-describedby="guessText">
+            <button class="step" id="bigger" aria-label="Make the second country bigger">+</button>
+          </div>
+          <div class="slider-ends"><span>Way smaller</span><span>Way bigger</span></div>
+          <button class="btn primary lock" id="lockBtn" disabled>Lock in my guess</button>
+        </div>
+
+        <div class="result" id="resultPanel" hidden aria-live="polite">
+          <div class="result-score"><span id="scoreValue">0</span>%</div>
+          <div class="result-text">
+            <div class="result-verdict" id="verdict"></div>
+            <p class="result-truth" id="truth"></p>
+          </div>
+          <button class="btn primary" id="nextBtn">
+            <span id="nextLabel">Next pair</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- End of a 10-round game -->
+    <article class="card final" id="finalCard" hidden>
+      <div class="card-head final-head">
+        <div>
+          <div class="card-tag">Game over</div>
+          <h2 id="finalVerdict">Nice eye!</h2>
+        </div>
+      </div>
+      <div class="final-body">
+        <div class="final-score">
+          <span class="final-total" id="finalTotal">0</span>
+          <span class="final-max">/ 1000</span>
+          <span class="final-avg" id="finalAvg">0% average</span>
+        </div>
+
+        <form class="save-form" id="saveForm">
+          <label for="playerName">Put your name on the leaderboard</label>
+          <div class="save-row">
+            <input type="text" id="playerName" maxlength="20" autocomplete="nickname" placeholder="Your name" required>
+            <button class="btn primary" type="submit">Save score</button>
+          </div>
+          <p class="save-error" id="saveError" hidden>Couldn't save your score. Check your connection and try again.</p>
+        </form>
+
+        <div class="final-actions">
+          <button class="btn" id="playAgainBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>
+            Play again
+          </button>
+          <a class="btn" href="leaderboard/index.html">See leaderboard</a>
+        </div>
+      </div>
+    </article>
+
+    <a class="back-link" href="../EEp.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      Back to the map
+    </a>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+  <script src="scores.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

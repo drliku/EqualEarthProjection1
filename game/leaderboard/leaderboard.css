@@ -1,0 +1,97 @@
+/* Leaderboard page. Builds on ../../css/styles.css and ../game.css. */
+
+.card.board { display: block; }
+
+.mode-badge {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 4px 12px;
+  font-size: 15px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--navy);
+  background: var(--white);
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+}
+.mode-badge.global { color: var(--white); background: var(--navy); }
+
+.board-notice {
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  font-size: 17px;
+  background: var(--coral-soft);
+  border: 2px solid var(--coral-ink);
+  border-radius: 10px;
+}
+
+/* Rank | player | points */
+.board-head, .board-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+.board-head {
+  background: var(--navy);
+  font-size: 16px; letter-spacing: .12em; text-transform: uppercase;
+}
+.num { text-align: right; }
+
+.board-list { margin: 0; padding: 0; list-style: none; }
+.board-row { padding: 14px 18px; }
+.board-row + .board-row { border-top: 2px solid var(--coral-soft); }
+
+.rank {
+  display: grid; place-items: center;
+  width: 46px; height: 46px;
+  font-family: var(--display); font-size: 24px;
+  color: var(--navy);
+  background: var(--white);
+  border: 3px solid var(--navy);
+  border-radius: 50%;
+}
+/* Top three */
+.board-row:nth-child(1) .rank { background: var(--coral); box-shadow: 2px 2px 0 var(--navy); }
+.board-row:nth-child(2) .rank { background: var(--sky); box-shadow: 2px 2px 0 var(--navy); }
+.board-row:nth-child(3) .rank { background: var(--navy-soft); box-shadow: 2px 2px 0 var(--navy); }
+.board-row:nth-child(1) .player-name { font-size: 30px; }
+
+.player { display: grid; gap: 2px; min-width: 0; }
+.player-name {
+  font-family: var(--display); font-size: 24px; text-transform: uppercase;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.player-meta { font-size: 15px; color: var(--muted); }
+
+.points { font-family: var(--display); font-size: 34px; line-height: 1; text-align: right; }
+.points small { display: block; font-family: var(--body); font-size: 14px; color: var(--muted); }
+
+/* The score that was just saved */
+.board-row.new { background: var(--coral-soft); }
+.board-row.new .player-name::after {
+  content: "New";
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-size: 14px;
+  vertical-align: middle;
+  color: var(--white);
+  background: var(--coral-ink);
+  border-radius: 6px;
+}
+
+.board-empty { display: grid; justify-items: center; gap: 16px; padding: 40px 20px; text-align: center; }
+.board-empty p { margin: 0; font-size: 20px; color: var(--muted); }
+.board-empty .btn, .game-topbar .btn { text-decoration: none; }
+
+.board-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  margin-top: 28px;
+}
+.board-footer .back-link { margin-top: 0; }
+
+@media (max-width: 520px) {
+  .board-head, .board-row { grid-template-columns: 48px 1fr auto; gap: 12px; }
+  .rank { width: 40px; height: 40px; font-size: 20px; }
+  .player-name, .board-row:nth-child(1) .player-name { font-size: 20px; }
+  .points { font-size: 28px; }
+}
